@@ -1,0 +1,25 @@
+﻿# Arquivos do Node.js
+node_modules/
+npm-debug.log
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de configuração
+.env
+
+# Arquivos de build e cache
+build/
+.cache/
+dist/
+tmp/
+
+# Outros arquivos
+*.log
+*.tmp
+*.bak
+
+# Base de dados
+src/database/development.sqlite
+src/database/database.sqlite
