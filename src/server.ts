@@ -1,14 +1,5 @@
-import express from 'express';
-import * as dotenv from 'dotenv';
-import departuresRoutes from './routes/departuresRoutes';
+import { app } from './app';
 
-dotenv.config();
-
-const app = express();
-const port = process.env.APP_PORT;
-
-app.use('/departures', departuresRoutes);
-
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
+app.listen(process.env.APP_PORT, () => {
+    console.log(`Listening on port ${process.env.APP_PORT}`);
 });
