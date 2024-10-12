@@ -10,6 +10,7 @@ class UserRepository {
         try {
             return await knex('users')
                 .select('*')
+                .where('active', '1')
                 .then(resultado => {
                     return resultado;
                 })
