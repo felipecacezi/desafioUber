@@ -32,18 +32,7 @@ class UsersController {
     public async createUser(req: Request, res: Response) {
 
         try {
-            let userData = req.body;
-            const users = await knex('users')
-                .insert(userData)
-                .then(resultado => {
-                    return resultado;
-                })
-                .catch(erro => {
-                    return erro;
-                })
-                .finally(() => {
-                    knex.destroy();
-                });
+            const users = await UserService.createUser(req.body);
             
             res.status(201).json({
                 status: '201',
@@ -66,18 +55,7 @@ class UsersController {
             const id = req.params.id;
             let userData = req.body;
     
-            const users = await knex('users')
-                .where('id', id)
-                .update(userData)
-                .then(resultado => {
-                    return resultado;
-                })
-                .catch(erro => {
-                    return erro;
-                })
-                .finally(() => {
-                    knex.destroy();
-                });
+            const users = await UserService.updateUser(parseInt(id), userData);
     
             res.status(200).json({
                 status: '200',
@@ -92,6 +70,27 @@ class UsersController {
             });
         }
         
+    }
+
+    public deleteUser(req: Request, res: Response) {
+        try {
+            const id = req.params.id;
+            const users = UserService.deleteUser(
+                parseInt(id)
+            );
+            
+            res.status(200).json({
+                status: '200',
+                message: 'Usuário inativado com sucesso.',
+                data: users,
+            });
+            
+        } catch (error: any) {
+            res.json({
+                status: error.status,
+                message: error.message
+            });
+        }
     }
 }
 
