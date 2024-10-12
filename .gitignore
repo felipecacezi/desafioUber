@@ -8,6 +8,7 @@ Thumbs.db
 
 # Arquivos de configuração
 .env
+config.json
 
 # Arquivos de build e cache
 build/
@@ -22,9 +23,19 @@ tmp/
 
 # Arquivos de teste
 coverage/
+test_coverage/
 
 # Sessão
 desafioUber.session.sql
 
 # Arquivos vscode
-.vscode
+.vscode/
+
+# Arquivos de IDE
+.idea/
+*.iml
+
+# Outros arquivos ignorados
+logs/
+*.swp
+*.swo
