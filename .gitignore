@@ -25,3 +25,6 @@ coverage/
 
 # Sessão
 desafioUber.session.sql
+
+# Arquivos vscode
+.vscode
