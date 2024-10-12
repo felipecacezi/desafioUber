@@ -20,9 +20,8 @@ tmp/
 *.tmp
 *.bak
 
-# Base de dados
-src/database/development.sqlite
-src/database/database.sqlite
-
 # Arquivos de teste
 coverage/
+
+# Sessão
+desafioUber.session.sql
