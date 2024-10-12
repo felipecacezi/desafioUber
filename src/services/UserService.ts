@@ -1,4 +1,5 @@
 ﻿import UserRepository from "../repository/userRepository";
+import { User } from "../interfaces/User";
 
 class UserService {
     public async getUsers() {
@@ -9,7 +10,7 @@ class UserService {
         }
     }
 
-    public async createUser(user: object) {
+    public async createUser(user: User) {
         try {
             return await UserRepository.createUser(user);       
         } catch (error: any) {
@@ -17,7 +18,7 @@ class UserService {
         }
     }
 
-    public async updateUser(id: number, user: object) {
+    public async updateUser(id: number, user: User) {
         try {
             return await UserRepository.updateUser(id, user);
         } catch (error: any) {

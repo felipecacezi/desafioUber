@@ -1,5 +1,9 @@
 ﻿import {Knex} from "../database/knex/index";
+import { Password } from "../utils/Password";
+import { User } from "../interfaces/User";
 const knex = Knex;
+
+
 
 class UserRepository {
     constructor() {
@@ -16,35 +20,40 @@ class UserRepository {
                 })
                 .catch(erro => {
                     return erro;
-                })
-                .finally(() => {
-                    knex.destroy();
                 });
         } catch (error) {
             throw new Error("Ocorreu um erro ao buscar usuários, entre em contato com o suporte.");            
         }
     }
 
-    public async createUser(user: object) {
+    public async createUser(user: User) {
         try {
+            const password = new Password();
+            const senhaCriptografada = await password.generateHash(user.password);
+            user.password = senhaCriptografada;
+        
             return await knex('users')
-                .insert(user)
-                .then(result => {
-                    return result;
-                })
-                .catch(erro => {
-                    return erro;
-                })
-                .finally(() => {
-                    knex.destroy();
-                });
-        } catch (error) {
+              .insert(user)
+              .then(result => {
+                return result;
+              })
+              .catch(erro => {
+                return erro;
+              })
+              .finally(() => {
+                knex.destroy();
+              });
+          } catch (error) {
             throw new Error("Ocorreu um erro ao criar o usuário, entre em contato com o suporte.");            
-        }
+          }
     }
 
-    public async updateUser(id: number, user: object) {
+    public async updateUser(id: number, user: User) {
         try {
+            const password = new Password();
+            const senhaCriptografada = await password.generateHash(user.password);
+            user.password = senhaCriptografada;
+            
             return await knex('users')
                 .where('id', id)
                 .update(user)
@@ -53,9 +62,6 @@ class UserRepository {
                 })
                 .catch(erro => {
                     return erro;
-                })
-                .finally(() => {
-                    knex.destroy();
                 });
         } catch (error) {
             throw new Error("Ocorreu um erro ao atualizar o usuário, entre em contato com o suporte.");            
@@ -74,9 +80,6 @@ class UserRepository {
                 })
                 .catch(erro => {
                     return erro;
-                })
-                .finally(() => {
-                    knex.destroy();
                 });
         } catch (error) {
             throw new Error("Ocorreu um erro ao inativar o usuário, entre em contato com o suporte.");            
